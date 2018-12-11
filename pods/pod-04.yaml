@@ -1,0 +1,23 @@
+# Specify path & permission
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-04
+  namespace: itsmetommy
+  labels:
+    app: secret-examples
+spec:
+  containers:
+  - name: pod-04
+    image: nginx
+    volumeMounts:
+    - name: foo
+      mountPath: "/etc/foo"
+  volumes:
+  - name: foo
+    secret:
+      secretName: mysecret
+      items:
+      - key: username
+        path: my-group/my-username
+        mode: 0777

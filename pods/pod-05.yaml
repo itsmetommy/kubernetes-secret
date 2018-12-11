@@ -1,0 +1,24 @@
+# Environment variables
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-05
+  namespace: itsmetommy
+  labels:
+    app: secret-examples
+spec:
+  containers:
+  - name: pod-05
+    image: nginx
+    env:
+      - name: SECRET_USERNAME
+        valueFrom:
+          secretKeyRef:
+            name: mysecret
+            key: username
+      - name: SECRET_PASSWORD
+        valueFrom:
+          secretKeyRef:
+            name: mysecret
+            key: password
+  restartPolicy: Never

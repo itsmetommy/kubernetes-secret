@@ -1,0 +1,20 @@
+# Specify path
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-01
+  namespace: itsmetommy
+  labels:
+    app: secret-examples
+spec:
+  containers:
+  - name: pod-01
+    image: nginx
+    volumeMounts:
+    - name: foo
+      mountPath: "/etc/foo"
+      readOnly: true
+  volumes:
+  - name: foo
+    secret:
+      secretName: mysecret

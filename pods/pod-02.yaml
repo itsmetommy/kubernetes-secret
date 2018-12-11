@@ -1,0 +1,23 @@
+# Specify path and key value
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-02
+  namespace: itsmetommy
+  labels:
+    app: secret-examples
+spec:
+  containers:
+  - name: pod-02
+    image: nginx
+    volumeMounts:
+    - name: foo
+      mountPath: "/etc/foo"
+      readOnly: true
+  volumes:
+  - name: foo
+    secret:
+      secretName: mysecret
+      items:
+      - key: username
+        path: my-group/my-username
